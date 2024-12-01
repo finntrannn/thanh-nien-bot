@@ -1,4 +1,5 @@
 import { existsSync, copyFileSync } from "node:fs";
+import { logger } from "../utils/logger.js";
 
 export function validateConfig() {
 	if (!existsSync(".env")) {
