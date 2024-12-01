@@ -1,16 +1,17 @@
 import chalk from "chalk";
-import readline from "node:readline";
-import { ENV as environment } from "./config/enviroment.js";
+
+import { environment } from "./config/enviroment.js";
+import { logger } from "./utils/logger.js";
+import { validateConfig } from "./config/validation.js";
+
 import { ExamService } from "./services/exam/exam.service.js";
 import { AnswerService } from "./services/exam/answer.service.js";
 import { AuthService } from "./services/auth/auth.service.js";
-import { logger } from "./utils/logger.js";
-import { validateConfig } from "./config/validation.js";
 
 try {
 	validateConfig();
 } catch (ex) {
-	logger.error(ex.message);
+	logger.error(ex);
 	process.exit(0);
 }
 
@@ -36,7 +37,6 @@ async function main() {
 		const examContent = await examService.startExam(appToken);
 		// Process and submit answers
 		logger.info("Processing exam questions...");
-		console.log("");
 		await processExamQuestions(
 			examContent,
 			answerService,
@@ -57,38 +57,29 @@ async function processExamQuestions(
 ) {
 	for (let [questionIndex, question] of examContent.entries()) {
 		const questionNumber = questionIndex + 1;
-		readline.cursorTo(process.stdout, 0);
-		readline.clearLine(process.stdout, 0);
-		process.stdout.write(
-			`Processing question ${questionNumber}/${examContent.length}\r`
+		logger.info(
+			`Processing question ${questionNumber}/${examContent.length}`
 		);
 
 		try {
-			// Submit answer and get result
+			// Submit answer
 			const result = await answerService.submitAnswer({
 				question,
 				questionIndex,
 				appToken,
 			});
 
-			logQuestionProgress(questionNumber, question, result);
+			logger.info("Processed", chalk.cyan(`"${question.content}"`));
+			console.log(`=`.repeat(process.stdout.columns - 30));
 
 			// Handle final question
-			if (isLastQuestion(questionIndex, examContent)) {
+			if (examContent.length === questionIndex + 1) {
 				await handleFinalAnswer(examService, appToken);
 			}
 		} catch (error) {
 			logger.error(`Error processing question ${questionNumber}:`, error);
 		}
 	}
-}
-
-function logQuestionProgress(questionNumber, question, result) {
-	logger.info("Processed", chalk.cyan(`"${question.content}"`));
-}
-
-function isLastQuestion(currentIndex, examContent) {
-	return examContent.length === currentIndex + 1;
 }
 
 async function handleFinalAnswer(examService, appToken) {
