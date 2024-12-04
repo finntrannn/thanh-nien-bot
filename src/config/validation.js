@@ -10,7 +10,7 @@ export function validateConfig() {
 		);
 	}
 
-	const requiredEnvVars = ["USERNAME", "PASSWORD"];
+	const requiredEnvVars = ["USER_NAME", "PASSWORD"];
 	const missingVars = requiredEnvVars.filter(
 		(varName) => !process.env[varName]
 	);
