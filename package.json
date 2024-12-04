@@ -6,7 +6,7 @@
     "js-levenshtein": "^1.1.6"
   },
   "name": "thanh-nien-bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,7 +19,7 @@
   ],
   "author": "finntrannn",
   "license": "GPL-3.0",
-  "description": "",
+  "description": "một con bot nho nhỏ giúp bạn làm bài kiểm tra trên app Thanh Niên vèo vèo :P",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/finntrannn/thanh-nien-bot.git"
@@ -27,5 +27,6 @@
   "bugs": {
     "url": "https://github.com/finntrannn/thanh-nien-bot/issues"
   },
-  "homepage": "https://github.com/finntrannn/thanh-nien-bot#readme"
+  "homepage": "https://github.com/finntrannn/thanh-nien-bot#readme",
+  "devDependencies": {}
 }
