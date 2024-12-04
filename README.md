@@ -7,6 +7,11 @@ vèo vèo :P
 
 -   🔐 Đăng nhập bằng tài khoản của bạn
 -   🔄 Đọc file đáp án "answers.json" và trả lời dựa theo đáp án đã có sẵn
+-   🔥 Kết quả chạy thử: **83/100 điểm\*** trong vòng **8 giây\*\***
+    -   \*Tuỳ vào độ chính xác của file đáp án
+    -   \*\*Tuỳ vào tốc độ kết nối mạng của bạn
+
+[![Screenshot-2024-12-04-225754](https://i.ibb.co/d6MQkd3/Screenshot-2024-12-04-225754.png)](https://ibb.co/7VCGrwT)
 
 ## ⚙️ Hướng dẫn cài đặt
 
@@ -36,8 +41,8 @@ PASSWORD=""
 4. Tạo file JSON chứa nội dung đáp án
 
 -   File json sẽ có định dạng như sau
--   Đáp án không cần phải quá chính xác, có thể gần giống (thiếu hoặc thừa vài
-    chữ) cũng được vì bot sử dụng cơ chế fuzzy matching
+-   Câu hỏi hoặc đáp án không cần phải quá chính xác, có thể gần giống (thiếu
+    hoặc thừa vài chữ) cũng được vì bot sử dụng cơ chế fuzzy matching
 
 ```json
 [
