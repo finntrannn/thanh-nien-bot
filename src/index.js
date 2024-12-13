@@ -28,7 +28,10 @@ async function main() {
 		// Login and get token
 		logger.info("Initializing authentication...");
 		logger.info("Logging in...");
-		await authService.login();
+		let { data: loginData } = await authService.login();
+		logger.info(
+			`Logged in as: ${loginData.account.profile.full_name} (${loginData.account.account_id})`
+		);
 		await authService.getAuthToken();
 		const appToken = await authService.getAppToken();
 
@@ -70,7 +73,7 @@ async function processExamQuestions(
 			});
 
 			logger.info("Processed", chalk.cyan(`"${question.content}"`));
-			console.log(`=`.repeat(process.stdout.columns - 30));
+			logger.info(`=`.repeat(process.stdout.columns - 30));
 
 			// Handle final question
 			if (examContent.length === questionIndex + 1) {
